@@ -16,12 +16,21 @@
         http://www.springframework.org/schema/tx     
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">    
     
-    <mvc:annotation-driven />    
+    <mvc:annotation-driven />
+	<!-- 处理静态资源的请求 -->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+	
+    <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926" />
+    <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926" />
+    <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926" /> 
+    
     <context:component-scan base-package="com.yannis.whereus" />    
     
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">    
         <property name="prefix" value="/WEB-INF/view/" />    
-        <property name="suffix" value=".jsp" />    
+        <property name="suffix" value=".jsp" />
+        <property name="contentType" value="text/html;charset=utf-8"></property>
+    	<property name="order" value="1"/>    
     </bean>    
     
 </beans>

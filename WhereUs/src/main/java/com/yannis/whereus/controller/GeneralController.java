@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller    
 public class GeneralController {    
     
-    @RequestMapping(value="index.do")    
-    public void index_jsp(Model model){    
+    @RequestMapping(value="index")    
+    public void toIndexJsp(Model model){    
         model.addAttribute("hello", "Hello world");    
-        System.out.println("index.jsp");    
     }    
 }  
