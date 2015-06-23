@@ -14,6 +14,7 @@ package com.yannis.whereus.controller.weather;
 
 import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -23,10 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yannis.utils.PropertyUtils;
-import com.yannis.whereus.service.WeatherService;
+import com.yannis.whereus.service.IWeatherService;
 
 @Controller 
 public class WeatherQueryController {
+	
+	@Resource(name = "weatherService")
+	private IWeatherService weatherService; 
 	
 	@RequestMapping(value="weatherQuery")    
     public ModelAndView weatherQueryJSP(HttpServletRequest request,ModelAndView model){
@@ -44,7 +48,7 @@ public class WeatherQueryController {
 		String httpUrl = prop.getProperty("weatherqueryurl");
 		String httpArg = "city="+cityName;
 		
-	    return WeatherService.request(httpUrl, httpArg, apiKey);
+	    return weatherService.request(httpUrl, httpArg, apiKey);
     }
 	
 }
