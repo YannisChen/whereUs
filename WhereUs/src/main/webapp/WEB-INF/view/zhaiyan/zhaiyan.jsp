@@ -18,16 +18,13 @@
     <script type="text/javascript" src="<%=basePath%>resources/js/dateutil.js"></script>
         
     <body>
-		<div class="span12">
-			<div class="col-lg-2"></div>
-			<div class="col-lg-8">
+    	<div class="container-fluid">
+			<div class="span12">
 				<h2 class="text-center text-info" id="contentInner">
 				</h2>
 			</div>
-			<div class="col-lg-2"></div>
-		</div>
-		<div class="span12">
-			<div class="col-lg-4">
+			
+			<div class="span4">
 				<ul class="list-group">
 				  <li class="list-group-item list-group-item-success">分类:<span id="catname"></span></li>
 				  <li class="list-group-item list-group-item-info">出处:<span id="source"></span></li>
