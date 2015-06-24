@@ -2,15 +2,15 @@
  * - COPYRIGHT NOTICE -  
  *                                                *
  * Project Name:WhereUs 
- * File Name:WeatherQueryController.java 
- * Package Name:com.yannis.whereus.controller.weather 
+ * File Name:ZyController.java 
+ * Package Name:com.yannis.whereus.controller.zy 
  * Date:Jun 18, 20154:03:33 PM 
  * Copyright (c) 2015, piggachen@163.com All Rights Reserved.                                     
  *
  *                                                                       *
  ========================================================================*/
 
-package com.yannis.whereus.controller.weather;
+package com.yannis.whereus.controller.zy;
 
 import java.util.Properties;
 
@@ -25,30 +25,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yannis.utils.PropertyUtils;
 import com.yannis.whereus.service.IService;
+import com.yannis.whereus.service.IWeatherService;
 
 @Controller 
-public class WeatherQueryController {
+public class ZyController {
 	
 	@Resource(name = "serService")
-	private IService serService; 
+	private IService serService;
 	
-	@RequestMapping(value="weatherQuery")    
-    public ModelAndView weatherQueryJSP(HttpServletRequest request,ModelAndView model){
+	@RequestMapping(value="home")    
+    public ModelAndView homeJSP(HttpServletRequest request,ModelAndView model){
 		
-		model.setViewName("weather/weatherquery");
+		model.setViewName("zhaiyan/zhaiyan");
 		return model;
     }
 	
-	@RequestMapping(value="doWeatherQuery", method = RequestMethod.GET) 
-    public @ResponseBody String doWeatherQuery(HttpServletRequest request){
-		String cityName = request.getParameter("cityName");
+	@RequestMapping(value="zyRequest", method = RequestMethod.GET) 
+    public @ResponseBody String zyRequest(HttpServletRequest request){
 		
-		Properties prop = PropertyUtils.getPropertyFile(WeatherQueryController.class, "configfile.properties");
-		String apiKey = prop.getProperty("apikey");
+		Properties prop = PropertyUtils.getPropertyFile(ZyController.class, "configfile.properties");
 		String httpUrl = prop.getProperty("weatherqueryurl");
-		String httpArg = "city="+cityName;
 		
-	    return serService.request(httpUrl, httpArg, apiKey,0);
+	    return serService.request(httpUrl, null, null,0);
     }
 	
 }

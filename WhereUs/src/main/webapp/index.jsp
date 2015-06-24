@@ -28,25 +28,37 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="javascript:void(0);" id="queryWeather">天气查询 <span class="sr-only">(current)</span></a></li>
-		        <li><a href="#">Link</a></li>
+		        <li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
+		        <li><a href="javascript:checkWeather();" id="queryWeather">天气查询 </a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
+		    
+		    <div class="hero-unit" id="innerPage">
+				
+			</div>
+			
 		  </div><!-- /.container-fluid -->
-		  <!-- head end -->
-		  <div class="panel panel-default" id="innerPage" >
-		  	
-		  </div>
+		 
 		</nav>  
+		
     </body>
     <script>
     	$(document).ready( function() { 
-    			$("#innerPage").load("<%=basePath %>web/weatherQuery");
-    			
-        		$('#queryWeather').bind('click', function(event) {
-        			$("#innerPage").load("<%=basePath %>web/weatherQuery");
-        	    });
+    			$("#innerPage").load("<%=basePath %>web/home");
     		}
-    	);     
+    	);
+    	
+    	function checkWeather(){
+    		removeClass($(this));
+    		$(this).parent().addClass("active"); 
+    		$("#innerPage").load("<%=basePath %>web/weatherQuery");
+    	}
+    	
+    	function removeClass(obj){
+    		var lichilds = $(obj).parent().parent().children("li");
+    		$.each(lichilds,function() {
+    			$(this).removeClass();
+            });
+    	}
     </script>
 </html>
