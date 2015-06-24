@@ -28,7 +28,7 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
+		        <li class="active"><a href="javascript:checkHome();">首页<span class="sr-only">(current)</span></a></li>
 		        <li><a href="javascript:checkWeather();" id="queryWeather">天气查询 </a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
@@ -52,6 +52,10 @@
     		removeClass($(this));
     		$(this).parent().addClass("active"); 
     		$("#innerPage").load("<%=basePath %>web/weatherQuery");
+    	}
+    	
+    	function checkHome(){
+    		$("#innerPage").load("<%=basePath %>web/home");
     	}
     	
     	function removeClass(obj){

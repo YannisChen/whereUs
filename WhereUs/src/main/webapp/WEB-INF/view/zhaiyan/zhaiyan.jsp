@@ -18,64 +18,60 @@
     <script type="text/javascript" src="<%=basePath%>resources/js/dateutil.js"></script>
         
     <body>
-		<h1>
-			Hello, world!
-		</h1>
-		<p>
-			这是一个可视化布局模板, 你可以点击模板里的文字进行修改, 也可以通过点击弹出的编辑框进行富文本修改. 拖动区块能实现排序.
-		</p>
-		<p>
-			<a class="btn btn-primary btn-large" href="#">参看更多 »</a>
-		</p>
+		<div class="span12">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<h2 class="text-center text-info" id="contentInner">
+				</h2>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<div class="span12">
+			<div class="col-lg-4">
+				<ul class="list-group">
+				  <li class="list-group-item list-group-item-success">分类:<span id="catname"></span></li>
+				  <li class="list-group-item list-group-item-info">出处:<span id="source"></span></li>
+				  <li class="list-group-item list-group-item-warning">作者:<span id="author"></span></li>
+				</ul>
+			</div>
+		</div>
+		
+
     </body>
-    <script type="text/javascript"charset="utf-8">
+    <script type="text/javascript" charset="utf-8">
     	$(document).ready(function() {
-    		$('#submitBut').bind('click', function(event) {
-    	        queryweather($("#cityName").val());
-    	    });
-      	});
-    	
-    	function queryweather(cityName){
-        	$.ajax( {
-    			url:'<%= basePath %>web/doWeatherQuery',// 跳转到 action    
-    		    data:{    
-    		    	cityName : cityName
-    		    },
+    		$.ajax( {
+    			url:'<%= basePath %>web/zyRequest',// 跳转到 action 
+    			data:{ },
     		    type:'get',    
     		    cache:false,    
     		    dataType:'',    
     		    success:function(data) {
     		    	//$("#weatherDiv").html(data);
-    		    	var obj = eval('(' + data + ')');
-    		    	if(obj.errNum == 0){
-    		    		var airInfo = obj.retData;
-    		    		if(airInfo != ""){
-    		    			var city = airInfo.city;		//当前城市
-    		    			var curTime = airInfo.time;		//更新时间
-    		    			var aqiVal = airInfo.aqi;		//空气质量指数
-    		    			var airLeval = airInfo.level;	//空气质量级别
-    		    			var core = airInfo.core;		//首要污染物
-    		    			curTime = dateFormat(curTime,"yyyy-MM-dd hh:mm:ss");
-    		    			$("#weatherDiv").attr("class", "col-lg-6 alert alert-success");
-    		    			$("#weatherDiv").html("当前城市："+city+"<br>更新时间:"+curTime+"<br>空气质量指数:"+aqiVal+"<br>空气质量级别:"+airLeval+"<br>首要污染物:"+core);
-    		    		}else{
-    		    			$("#weatherDiv").attr("class", "col-lg-6 alert alert-danger");
-    		    			$("#weatherDiv").html("Sorry,我们暂无该区域数据");
-    		    			return;
-    		    		}
+    		    	var zyInfo = eval('(' + data + ')');
+    		    	if(zyInfo != ""){
+   		    			var content = zyInfo.zhaiyan;		//内容
+   		    			var catname = zyInfo.catname ;		//类型
+   		    			var author = zyInfo.author ;		//作者
+   		    			var source = zyInfo.source ;		//来源
+   		    			$("#contentInner").html("『"+content+"』");
+   		    			$("#catname").html(catname);
+   		    			$("#author").html(author);
+   		    			$("#source").html(source);
     		    	}else{
-    		    		$("#weatherDiv").attr("class", "col-lg-6 alert alert-danger");
-    		    		$("#weatherDiv").html("请求失败，失败原因："+obj.retMsg);
+    		    		$("#contentInner").attr("class", "col-lg-6 list-group-item-danger");
+    		    		$("#contentInner").html("请求失败");
     		    		return;
     		    	}
     		    	
     		    },    
     		    error : function() {
-    		    	$("#weatherDiv").html("请求超时,请检查当前网络");
+    		    	$("#contentInner").attr("class", "col-lg-6 list-group-item-danger");
+    		    	$("#contentInner").html("请求超时,请检查当前网络");
     		    	return false;
     		    }
     		});
-        }
+      	});
     	
     </script>
 </html>

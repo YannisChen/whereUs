@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.yannis.whereus.service.IService;
@@ -25,6 +26,8 @@ import com.yannis.whereus.service.IService;
 @Service("serService")
 public class SerService implements IService {
 
+	private Logger log = Logger.getLogger(SerService.class);
+	
 	public String request(String httpUrl, String httpArg, String apiKey,int requestType) {
 		BufferedReader reader = null;
 	    String result = null;
@@ -56,6 +59,7 @@ public class SerService implements IService {
 	        }
 	        reader.close();
 	        result = sbf.toString();
+	        log.info("query result---->"+result);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }

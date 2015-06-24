@@ -61,21 +61,22 @@
     		    			var airLeval = airInfo.level;	//空气质量级别
     		    			var core = airInfo.core;		//首要污染物
     		    			curTime = dateFormat(curTime,"yyyy-MM-dd hh:mm:ss");
-    		    			$("#weatherDiv").attr("class", "col-lg-6 alert alert-success");
+    		    			$("#weatherDiv").attr("class", "col-lg-6 list-group-item-success");
     		    			$("#weatherDiv").html("当前城市："+city+"<br>更新时间:"+curTime+"<br>空气质量指数:"+aqiVal+"<br>空气质量级别:"+airLeval+"<br>首要污染物:"+core);
     		    		}else{
-    		    			$("#weatherDiv").attr("class", "col-lg-6 alert alert-danger");
+    		    			$("#weatherDiv").attr("class", "col-lg-6 list-group-item-danger");
     		    			$("#weatherDiv").html("Sorry,我们暂无该区域数据");
     		    			return;
     		    		}
     		    	}else{
-    		    		$("#weatherDiv").attr("class", "col-lg-6 alert alert-danger");
+    		    		$("#weatherDiv").attr("class", "col-lg-6 list-group-item-danger");
     		    		$("#weatherDiv").html("请求失败，失败原因："+obj.retMsg);
     		    		return;
     		    	}
     		    	
     		    },    
     		    error : function() {
+    		    	$("#weatherDiv").attr("class", "col-lg-6 list-group-item-danger");
     		    	$("#weatherDiv").html("请求超时,请检查当前网络");
     		    	return false;
     		    }

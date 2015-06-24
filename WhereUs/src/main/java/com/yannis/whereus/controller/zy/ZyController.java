@@ -16,6 +16,7 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yannis.utils.PropertyUtils;
 import com.yannis.whereus.service.IService;
-import com.yannis.whereus.service.IWeatherService;
 
 @Controller 
 public class ZyController {
@@ -41,10 +41,10 @@ public class ZyController {
     }
 	
 	@RequestMapping(value="zyRequest", method = RequestMethod.GET) 
-    public @ResponseBody String zyRequest(HttpServletRequest request){
+    public @ResponseBody String zyRequest(HttpServletRequest request,HttpServletResponse response){
 		
 		Properties prop = PropertyUtils.getPropertyFile(ZyController.class, "configfile.properties");
-		String httpUrl = prop.getProperty("weatherqueryurl");
+		String httpUrl = prop.getProperty("zyurl");
 		
 	    return serService.request(httpUrl, null, null,0);
     }
